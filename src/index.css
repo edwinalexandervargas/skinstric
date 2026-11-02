@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+
+/* Design tokens, copied from the Figma file. Use them as Tailwind classes:
+   bg-paper, text-ink, bg-panel, text-muted, text-hero, text-display, etc. */
+@theme {
+  /* Stand-in for Roobert (see index.html). */
+  --font-sans: 'Inter Tight', 'Roobert', system-ui, sans-serif;
+
+  --color-ink: #1a1b1c; /* text, dark buttons */
+  --color-paper: #fcfcfc; /* page background */
+  --color-panel: #f3f3f4; /* grey panels on the demographics page */
+  --color-hover: #e1e1e2; /* hovered list rows */
+  --color-line: #d9d9d9; /* borders */
+  --color-muted: #a0a4ab; /* placeholder and helper text */
+
+  /* Type scale. Each size carries its own line height and letter spacing. */
+  --text-hero: 8rem; /* 128px "Sophisticated skincare" */
+  --text-hero--line-height: 0.94;
+  --text-hero--letter-spacing: -0.07em;
+  --text-display: 4.5rem; /* 72px "Demographics" */
+  --text-display--line-height: 0.89;
+  --text-display--letter-spacing: -0.06em;
+  --text-input: 3.75rem; /* 60px the name and location input */
+  --text-input--line-height: 1.07;
+  --text-input--letter-spacing: -0.07em;
+  --text-title: 2.5rem; /* 40px the chosen value on the demographics page */
+  --text-title--line-height: 1;
+  --text-title--letter-spacing: -0.05em;
+  --text-label: 1rem; /* 16px labels and lists */
+  --text-label--line-height: 1.5;
+  --text-label--letter-spacing: -0.02em;
+  --text-body: 0.875rem; /* 14px body copy */
+  --text-body--line-height: 1.71;
+  --text-tiny: 0.625rem; /* 10px small buttons */
+  --text-tiny--line-height: 1.6;
+  --text-tiny--letter-spacing: -0.02em;
+
+  --animate-spin-slow: spin 40s linear infinite;
+  --animate-spin-mid: spin 30s linear infinite;
+  --animate-spin-fast: spin 20s linear infinite;
+  --animate-fade-in: fade-in 0.4s ease-out both;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  button {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: default;
+  }
+}
+
+/* The dotted squares rotated 45 degrees that sit behind most screens.
+   Kept in plain CSS: a dotted, rotated, layered shape is simpler here than in class names. */
+@layer components {
+  .diamond {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--size);
+    height: var(--size);
+    translate: -50% -50%;
+    rotate: 45deg;
+    border: 2px dotted var(--color-ink);
+    pointer-events: none;
+  }
+}
