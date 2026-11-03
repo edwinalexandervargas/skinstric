@@ -1,5 +1,5 @@
-import { todo } from './todo'
 import type { Demographics } from './types'
+import { stripDataUrlPrefix } from './image'
 
 export const PHASE_ONE_URL =
   'https://us-central1-frontend-simplified.cloudfunctions.net/skinstricPhaseOne'
@@ -26,5 +26,16 @@ export async function submitIntro(name: string, location: string): Promise<void>
  * Takes the full data URL.
  */
 export async function analyzeImage(imageDataUrl: string): Promise<Demographics> {
-  todo('analyzeImage (src/lib/api.ts)')
+  const response = await fetch(PHASE_TWO_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json' },
+    body: JSON.stringify({ Image: stripDataUrlPrefix(imageDataUrl) })
+  })
+
+  if (!response.ok) {
+    throw new Error(`Couldn't analyze your photo...(status ${response.status}). Please try again.`)
+  }
+  const json = await response.json()
+  return json.data
 }
+

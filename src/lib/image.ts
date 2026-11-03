@@ -19,10 +19,16 @@ export function resizeImage(
 
 /** Grabs the current frame of a playing <video> as a JPEG data URL. */
 export function captureFrame(_video: HTMLVideoElement): string {
-  todo('captureFrame (src/lib/image.ts)')
+  
 }
 
 /** "data:image/jpeg;base64,AAAA" -> "AAAA". Strings without a prefix come back unchanged. */
 export function stripDataUrlPrefix(dataUrl: string): string {
-  return dataUrl
+  const commaIndex = dataUrl.indexOf(',')
+
+  if (commaIndex === -1) {
+    return dataUrl
+  }
+
+  return dataUrl.slice(commaIndex + 1)
 }
