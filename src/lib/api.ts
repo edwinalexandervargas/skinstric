@@ -25,11 +25,12 @@ export async function submitIntro(name: string, location: string): Promise<void>
  * Sends the photo to Phase 2 and returns the `data` part of the response (race / age / gender).
  * Takes the full data URL.
  */
+// The PDF says "Image", but the server only accepts lowercase "image" (probed in the console).
 export async function analyzeImage(imageDataUrl: string): Promise<Demographics> {
   const response = await fetch(PHASE_TWO_URL, {
     method: 'POST',
     headers: {'Content-Type': 'application/json' },
-    body: JSON.stringify({ Image: stripDataUrlPrefix(imageDataUrl) })
+    body: JSON.stringify({ image: stripDataUrlPrefix(imageDataUrl) })
   })
 
   if (!response.ok) {

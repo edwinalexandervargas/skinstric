@@ -48,7 +48,7 @@ describe('analyzeImage', () => {
     expect(url).toBe(PHASE_TWO_URL)
     expect(init.method).toBe('POST')
     // Matches the PDF: key "Image", plain base64.
-    expect(body).toEqual({ Image: '/9j/4AAQ' })
+    expect(body).toEqual({ image: '/9j/4AAQ' })
     expect(result).toEqual(SAMPLE_RESULTS)
   })
 
