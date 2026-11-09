@@ -3,7 +3,6 @@ import { openFrontCamera, stopStream } from './camera'
 
 describe('stopStream', () => {
   it('stops every track', () => {
-
     const track1 = { stop: vi.fn() }
     const track2 = { stop: vi.fn() }
     const fakeStream = { getTracks: () => [track1, track2] }
@@ -18,7 +17,7 @@ describe('stopStream', () => {
 describe('openFrontCamera', () => {
   afterEach(() => vi.unstubAllGlobals())
 
-  it('asks for the front camera with no audio and returns the stream', async () => {
+  it('asks for the front camera in HD with no audio and returns the stream', async () => {
     const fakeStream = { id: 'fake' }
     const getUserMedia = vi.fn().mockResolvedValue(fakeStream)
 
@@ -27,7 +26,11 @@ describe('openFrontCamera', () => {
     const result = await openFrontCamera()
 
     expect(getUserMedia).toHaveBeenCalledWith({
-      video: { facingMode: 'user' },
+      video: {
+        facingMode: 'user',
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+      },
       audio: false,
     })
     expect(result).toBe(fakeStream)

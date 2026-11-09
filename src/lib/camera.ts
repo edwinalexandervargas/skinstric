@@ -1,5 +1,5 @@
 export function stopStream(stream: MediaStream) {
-   stream.getTracks().forEach((n) => n.stop())
+  stream.getTracks().forEach((n) => n.stop())
 }
 
 export async function openFrontCamera() {
@@ -8,9 +8,11 @@ export async function openFrontCamera() {
   }
 
   return navigator.mediaDevices.getUserMedia({
-    video: { facingMode: 'user' },
+    video: {
+      facingMode: 'user',
+      width: { ideal: 1920 },
+      height: { ideal: 1080 },
+    },
     audio: false,
   })
-
-
 }
