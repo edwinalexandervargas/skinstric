@@ -129,3 +129,14 @@ Each entry: what I did, why, what else I considered, and what it costs.
   but be fake, and it's outside the spec.
 - **Trade-off:** The menu has tiles that don't do anything yet, but they match the design and
   leave room for those features later.
+
+## 14. Ask the camera for HD with "ideal" sizes
+
+- **What:** `openFrontCamera` asks for `width: { ideal: 1920 }` and `height: { ideal: 1080 }` along
+  with the front camera.
+- **Why:** With no size given, many browsers default to a low resolution like 640x480, and
+  stretching that to fill the screen made the live preview look cloudy. `ideal` means "use this
+  if you can", so cameras that can't do 1080p still work at their best size.
+- **Alternative I rejected:** `exact` sizes. A camera that can't match them fails completely.
+- **Trade-off:** A bigger frame is captured, but the copy sent to the API is still shrunk to
+  800px (decision 7), so uploads stay small. The sharper image is only for what the user sees.
