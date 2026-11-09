@@ -35,7 +35,7 @@ export function Demographics() {
 
       <div className="px-4 pt-4 sm:px-8">
         <p className="text-label font-semibold uppercase">A. I. Analysis</p>
-        <h1 className="mt-2 text-[clamp(3rem,9vw,4.5rem)] leading-[0.89] tracking-[-0.06em] uppercase">
+        <h1 className="mt-2 text-[clamp(2.25rem,9vw,4.5rem)] leading-[0.89] tracking-[-0.06em] uppercase">
           Demographics
         </h1>
         <p className="text-body mt-2 uppercase">Predicted race &amp; age</p>

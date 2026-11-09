@@ -25,7 +25,7 @@ export function ImageChoice() {
         To start analysis
       </p>
 
-      <main className="relative flex flex-1 flex-col items-center justify-center gap-16 px-4 py-12 md:flex-row md:justify-around md:gap-8 md:py-0">
+      <main className="relative flex flex-1 flex-col items-center justify-center gap-4 px-4 py-6 md:flex-row md:justify-around md:gap-8 md:py-0">
         <Choice
           icon={<CameraIcon className="size-full" />}
           label={
@@ -124,13 +124,11 @@ interface ChoiceProps {
 
 /** One of the two big options: dotted squares, a round icon, and a label on a pointer line. */
 function Choice({ icon, label, labelSide, onClick, dimmed, children }: ChoiceProps) {
-  const size = 'min(482px, 78vw)'
   return (
     <div
-      className={`relative flex items-center justify-center transition-opacity duration-300 ${dimmed ? 'opacity-30' : ''}`}
-      style={{ width: size, height: size }}
+      className={`relative flex aspect-square w-[min(60vw,482px)] items-center justify-center transition-opacity duration-300 md:w-[min(38vw,482px)] ${dimmed ? 'opacity-30' : ''}`}
     >
-      <Diamonds size={size} />
+      <Diamonds size="100%" />
       <button
         type="button"
         onClick={onClick}
