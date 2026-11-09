@@ -1,6 +1,7 @@
 /** Opens the front camera into videoRef and closes it again. status: 'idle' | 'starting' | 'live' | 'error'. */
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { errorMessage, todo } from '@/lib/todo'
+import { errorMessage } from '@/lib/todo'
+import { openFrontCamera, stopStream } from '@/lib/camera'
 
 export type CameraStatus = 'idle' | 'starting' | 'live' | 'error'
 
@@ -13,15 +14,21 @@ export function useCamera() {
 
   const stop = useCallback(() => {
     const stream = streamRef.current
-    if (!stream) return
-    void stream
+    if (!stream) return 
+    stopStream(stream)
+    streamRef.current = null
   }, [])
 
   const start = useCallback(async () => {
     setStatus('starting')
     setError(null)
     try {
-      todo('useCamera start() (src/hooks/useCamera.ts)')
+      const stream = await openFrontCamera()
+      streamRef.current = stream
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream
+      }
+      setStatus('live')
     } catch (err) {
       setError(errorMessage(err))
       setStatus('error')
