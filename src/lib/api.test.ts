@@ -47,7 +47,7 @@ describe('analyzeImage', () => {
     const { url, init, body } = firstCall(fetchMock)
     expect(url).toBe(PHASE_TWO_URL)
     expect(init.method).toBe('POST')
-    // Matches the PDF: key "Image", plain base64.
+    // The live API wants lowercase "image" (the PDF says "Image"); see DECISIONS.md #8.
     expect(body).toEqual({ image: '/9j/4AAQ' })
     expect(result).toEqual(SAMPLE_RESULTS)
   })
